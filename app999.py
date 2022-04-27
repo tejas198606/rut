@@ -81,6 +81,11 @@ def upload():
 
         # Make prediction
         preds = model_predict(file_path, model)
+        
+        ## process results for human             
+        ##pred_class=preds.argmax(axis=-1)       ## simpale argmax
+        pred_class=decode_predictions(preds,top=1)  ## imagenet decision
+        result=str(pred_class[0][0][1])
         result=preds
         return result
     return None
